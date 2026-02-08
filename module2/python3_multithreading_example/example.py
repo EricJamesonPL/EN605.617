@@ -20,16 +20,18 @@ threads = []
 try:
     for i in range(NUM_THREADS):
         print("In main: creating thread {}".format(i))
-        x = threading.Thread(target=print_time, args=('Thread-{}'.format(i), 2 * (i + 1)))
+        x = threading.Thread(
+            target=print_time, args=("Thread-{}".format(i), 2 * (i + 1))
+        )
         threads.append(x)
         x.start()
-except:
-    print("Error: unable to create thread")
+except Exception as e:
+    print(f"Error: unable to create thread: {e}")
 
 try:
     for thread in threads:
         thread.join()
-except:
-    print("Error: unable to start thread")
+except Exception as e:
+    print(f"Error: unable to start thread {e}")
 
 print("In main: All threads completed successfully")
